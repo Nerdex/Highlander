@@ -8,9 +8,9 @@ import org.lwjgl.opengl.*;
  */
 public class DisplayManager {
 
-    private static final int WIDTH = 1280;
-    private static final int HEIGHT = 720;
-    private static final int FPS_CAP = 120;
+    private final int WIDTH = 1280;
+    private final int HEIGHT = 720;
+    private final int FPS_CAP = 120;
 
     public static void createDisplay(){
         ContextAttribs attribs = new ContextAttribs(4 ,4);
