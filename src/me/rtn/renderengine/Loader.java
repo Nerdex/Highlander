@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,10 @@ public class Loader {
     private List<Integer> vbos = new ArrayList<Integer>();
 
     //loading the vao to the screen
-    public RawModel loadToVAO(float[] positions){
+    public RawModel loadToVAO(float[] positions, int[] indicies){
         int vaoID = createVAO();
-        storeAttributeDataList(0, positions);
+        bindIndiciesBuffer(indicies);
+        storeAttributeDataList(indicies.length, positions);
         unbindVAO();
         return new RawModel(vaoID, positions.length / 3);
     }
@@ -56,6 +58,24 @@ public class Loader {
         //unbinds the vao
         GL30.glBindVertexArray(0);
     }
+
+    //loads up indicies buffer
+    private void bindIndiciesBuffer(int[] indicies){
+        int vboID = GL15.glGenBuffers();
+        vbos.add(vboID);
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER_BINDING, vboID);
+        IntBuffer buffer = storeDataInIntBuffer(indicies);
+        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
+    }
+
+    //storing in a int buffer
+    private IntBuffer storeDataInIntBuffer(int[] data){
+        IntBuffer buffer = BufferUtils.createIntBuffer(data.length);
+        buffer.put(buffer);
+        buffer.flip();
+        return buffer;
+    }
+
     //some data needs to be stored in a float, this is what this does
     private FloatBuffer storeDataInFloatBuffer(float[] data){
         FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);

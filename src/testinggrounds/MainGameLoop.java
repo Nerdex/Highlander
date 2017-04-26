@@ -24,6 +24,7 @@ public class MainGameLoop {
                 0.5F, -0.5F, 0f,
                 0.5F, 0.5F, 0f,
                 -0.5F, 0.5F, 0f
+                //this actually renders as a quad lol
         };
 
         RawModel model = loader.loadToVAO(v);
