@@ -4,6 +4,7 @@ import me.rtn.renderengine.DisplayManager;
 import me.rtn.renderengine.Loader;
 import me.rtn.renderengine.RawModel;
 import me.rtn.renderengine.Renderer;
+import me.rtn.renderengine.shaders.StaticShader;
 import org.lwjgl.opengl.Display;
 /**
  * Created by George on 25-Apr-17 on Apr at 11:31 PM.
@@ -12,8 +13,10 @@ public class MainGameLoop {
 
     public static void main(String[] args){
 
+        DisplayManager.createDisplay();
         Loader loader = new Loader();
         Renderer render = new Renderer();
+        StaticShader shader = new StaticShader();
 
         float[] v = {
                 //left triangle bottom
@@ -37,12 +40,14 @@ public class MainGameLoop {
         RawModel model = loader.loadToVAO(v, indicies);
 
         while(!Display.isCloseRequested()){
-            DisplayManager.createDisplay();
             render.prepare();
+            shader.start();
+            render.render(model);
+            shader.stop();
             DisplayManager.updateDisplay();
         }
+        shader.clean();
         loader.cleaner();
-        //closing display when requested
         DisplayManager.disposeDisply();
     }
 }
