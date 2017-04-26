@@ -2,7 +2,7 @@
 
 in vec3 pos;
 
-out vec3  colour;
+out vec3 colour;
 
 void main(void){
 
