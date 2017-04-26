@@ -26,8 +26,14 @@ public class MainGameLoop {
                 -0.5F, 0.5F, 0f
                 //this actually renders as a quad lol
         };
+        int[] indicies = {
+                //V0, V1, V3
+                0,1,3,
+                //V3,V1,V2
+                3,1,2
+        };
 
-        RawModel model = loader.loadToVAO(v);
+        RawModel model = loader.loadToVAO(v, indicies);
 
         DisplayManager.createDisplay();
 
