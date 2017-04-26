@@ -14,6 +14,7 @@ public class DisplayManager {
 
     //pretty obvious what this is gonna do
     public static void createDisplay(){
+
         ContextAttribs attribs = new ContextAttribs(4 ,4);
         attribs.withForwardCompatible(true);
         attribs.withProfileCore(true);

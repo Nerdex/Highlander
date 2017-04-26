@@ -33,11 +33,11 @@ public class MainGameLoop {
                 3,1,2
         };
 
+
         RawModel model = loader.loadToVAO(v, indicies);
 
-        DisplayManager.createDisplay();
-
         while(!Display.isCloseRequested()){
+            DisplayManager.createDisplay();
             render.prepare();
             DisplayManager.updateDisplay();
         }
