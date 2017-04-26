@@ -26,6 +26,32 @@ public abstract class ShaderProgram {
         GL20.glAttachShader(pID, fragmentShaderID);
         GL20.glLinkProgram(pID);
         GL20.glValidateProgram(pID);
+        bindAttributes();
+    }
+
+    //general starting/stopping shaders
+    public void start(){
+        GL20.glUseProgram(pID);
+    }
+
+    public void stop(){
+        GL20.glUseProgram(0);
+    }
+
+    public void clean(){
+        stop();
+        GL20.glDetachShader(pID, vertexShaderID);
+        GL20.glDetachShader(pID, fragmentShaderID);
+        GL20.glDeleteProgram(vertexShaderID);
+        GL20.glDeleteProgram(fragmentShaderID);
+        GL20.glDeleteProgram(pID);
+    }
+
+    //binding attributes
+    protected abstract void bindAttributes();
+
+    protected void bindAttribute(int attribute, String variableName){
+        GL20.glBindAttribLocation(pID, attribute, variableName);
     }
 
     //need this to load and read the shader files
