@@ -2,6 +2,7 @@ package me.rtn.renderengine;
 
 import com.sun.org.glassfish.gmbal.ManagedData;
 import me.rtn.renderengine.models.RawModel;
+import me.rtn.renderengine.models.TexturedModel;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
@@ -19,7 +20,8 @@ public class Renderer {
     }
 
     //rendering the raw model
-    public void render(RawModel model){
+    public void render(TexturedModel tModel){
+        RawModel model = tModel.getRawModel();
 
         GL30.glBindVertexArray(model.getVaoID());
         GL20.glEnableVertexAttribArray(0);

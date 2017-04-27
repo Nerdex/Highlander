@@ -4,7 +4,9 @@ import me.rtn.renderengine.DisplayManager;
 import me.rtn.renderengine.Loader;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.Renderer;
+import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
+import me.rtn.renderengine.textures.ModelTexture;
 import org.lwjgl.opengl.Display;
 /**
  * Created by George on 25-Apr-17 on Apr at 11:31 PM.
@@ -36,13 +38,15 @@ public class MainGameLoop {
                 3,1,2
         };
 
-
+        //Defining the fucking models
         RawModel model = loader.loadToVAO(v, indicies);
+        ModelTexture texture = new ModelTexture(loader.loadTexture("image"));
+        TexturedModel tModel = new TexturedModel(model, texture);
 
         while(!Display.isCloseRequested()){
             render.prepare();
             shader.start();
-            render.render(model);
+            render.render(tModel);
             shader.stop();
             DisplayManager.updateDisplay();
         }
