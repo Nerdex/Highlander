@@ -13,5 +13,6 @@
     <orderEntry type="library" name="org.slick2d:slick2d-basic-game-archetype:1.0.1" level="project" />
     <orderEntry type="library" name="slick-util" level="project" />
     <orderEntry type="library" name="slick" level="project" />
+    <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
   </component>
 </module>

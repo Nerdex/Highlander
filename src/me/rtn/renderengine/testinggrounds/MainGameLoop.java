@@ -1,5 +1,6 @@
-package testinggrounds;
+package me.rtn.renderengine.testinggrounds;
 
+import kotlin.Unit;
 import me.rtn.renderengine.DisplayManager;
 import me.rtn.renderengine.Loader;
 import me.rtn.renderengine.models.RawModel;
@@ -7,6 +8,7 @@ import me.rtn.renderengine.Renderer;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
 import me.rtn.renderengine.textures.ModelTexture;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.Display;
 /**
  * Created by George on 25-Apr-17 on Apr at 11:31 PM.
@@ -53,5 +55,9 @@ public class MainGameLoop {
         shader.clean();
         loader.cleaner();
         DisplayManager.disposeDisply();
+    }
+    //ignore this shit for now
+    public static void main(@NotNull Unit load) {
+
     }
 }
