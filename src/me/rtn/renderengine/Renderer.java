@@ -1,6 +1,7 @@
 package me.rtn.renderengine;
 
 import com.sun.org.glassfish.gmbal.ManagedData;
+import me.rtn.renderengine.models.RawModel;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;

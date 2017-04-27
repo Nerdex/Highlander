@@ -1,6 +1,7 @@
 package me.rtn.renderengine;
 
 
+import me.rtn.renderengine.models.RawModel;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
@@ -24,6 +25,7 @@ public class Loader {
     //used to store and removed vaos from the systems memory
     private List<Integer> vaos = new ArrayList<Integer>();
     private List<Integer> vbos = new ArrayList<Integer>();
+    private List<Integer> textures = new ArrayList<Integer>();
 
     //loading the vao to the screen
     public RawModel loadToVAO(float[] positions, int[] indicies){
@@ -44,6 +46,7 @@ public class Loader {
             e.printStackTrace();
         }
         int textureID = texture.getTextureID();
+        textures.add(textureID);
         return textureID;
     }
 
@@ -54,6 +57,10 @@ public class Loader {
         }
         for(int vbo : vbos){
             GL15.glDeleteBuffers(vbo);
+        }
+
+        for(int texture : textures){
+            GL11.glDeleteTextures(texture);
         }
     }
 

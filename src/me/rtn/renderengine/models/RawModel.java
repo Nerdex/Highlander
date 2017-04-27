@@ -1,4 +1,4 @@
-package me.rtn.renderengine;
+package me.rtn.renderengine.models;
 
 /**
  * Created by George on 26-Apr-17 on Apr at 2:01 AM.

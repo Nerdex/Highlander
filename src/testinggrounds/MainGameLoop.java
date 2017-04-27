@@ -2,7 +2,7 @@ package testinggrounds;
 
 import me.rtn.renderengine.DisplayManager;
 import me.rtn.renderengine.Loader;
-import me.rtn.renderengine.RawModel;
+import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.Renderer;
 import me.rtn.renderengine.shaders.StaticShader;
 import org.lwjgl.opengl.Display;
