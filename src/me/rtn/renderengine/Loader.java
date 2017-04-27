@@ -1,11 +1,16 @@
 package me.rtn.renderengine;
 
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -28,6 +33,20 @@ public class Loader {
         unbindVAO();
         return new RawModel(vaoID, positions.length / 3);
     }
+
+    //texture loading
+
+    public int loadTexture(String fileName){
+        Texture texture = null;
+        try {
+            texture = TextureLoader.getTexture("PNG", new FileInputStream("res/"+fileName+".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int textureID = texture.getTextureID();
+        return textureID;
+    }
+
     //removing the buffers from user and from the lists
     public void cleaner(){
         for(int vao : vaos){
