@@ -22,7 +22,7 @@ public class MainGameLoop {
         Renderer render = new Renderer();
         StaticShader shader = new StaticShader();
 
-        float[] v = {
+        float[] verticies = {
                 //left triangle bottom
                 -0.5F, 0.5F, 0F,
                 -0.5F, -0.5F, 0F,
@@ -40,8 +40,15 @@ public class MainGameLoop {
                 3,1,2
         };
 
+        float[] texturedCoords = {
+                0,0, //V0
+                0,1, //V1
+                1,1, //V2
+                1,0  //V3
+        };
+
         //Defining the fucking models
-        RawModel model = loader.loadToVAO(v, indicies);
+        RawModel model = loader.loadToVAO(verticies, texturedCoords, indicies); //TODO: figure out why this is throwing a compile error
         ModelTexture texture = new ModelTexture(loader.loadTexture("image"));
         TexturedModel tModel = new TexturedModel(model, texture);
 

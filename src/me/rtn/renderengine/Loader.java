@@ -28,10 +28,11 @@ public class Loader {
     private List<Integer> textures = new ArrayList<Integer>();
 
     //loading the vao to the screen
-    public RawModel loadToVAO(float[] positions, int[] indicies){
+    public RawModel loadToVAO(float[] positions, float[] textureCoords, int[] indicies){
         int vaoID = createVAO();
         bindIndiciesBuffer(indicies);
-        storeAttributeDataList(indicies.length, positions);
+        storeAttributeDataList(indicies.length, 3, positions);
+        storeAttributeDataList(1, 2, textureCoords);
         unbindVAO();
         return new RawModel(vaoID, positions.length / 3);
     }
@@ -71,13 +72,13 @@ public class Loader {
         return vaoID;
     }
         //storing any data we need in this list with bounded vao
-    private void storeAttributeDataList(int attributeNumber, float[] data){
+    private void storeAttributeDataList(int attributeNumber, int coordSize, float[] data){
         int vboID = GL15.glGenBuffers();
         vbos.add(vboID);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);
         FloatBuffer buffer = storeDataInFloatBuffer(data);
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-        GL20.glVertexAttribPointer(attributeNumber, 3, GL11.GL_FLOAT, false, 0, 0);
+        GL20.glVertexAttribPointer(attributeNumber, coordSize, GL11.GL_FLOAT, false, 0, 0);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0); //should unbind the current vao
     }
     private void unbindVAO(){
