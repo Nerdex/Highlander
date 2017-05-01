@@ -28,7 +28,7 @@ public class OBJLoader {
         List<Integer> indicies = new ArrayList<Integer>();
         float[] verticiesArray = null;
         float[] normalArray = null;
-        float[] textureArray[] = null;
+        float[] textureArray = null;
         int[] indiciesArray = null;
         try {
             while(true){
@@ -39,13 +39,16 @@ public class OBJLoader {
                             Float.parseFloat(currentLine[3]));
                     verticies.add(vertex);
                 } else if(line.startsWith("vt ")){
-
+                    Vector2f texture = new Vector2f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]));
+                    textures.add(texture);
                 } else if(line.startsWith("vn ")){
                     Vector3f normal = new Vector3f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]),
                             Float.parseFloat(currentLine[3]));
                     normals.add(normal);
                 } else if(line.startsWith("t ")){
-
+                    textureArray = new float[verticies.size() * 2];
+                    normalArray = new float[verticies.size() * 3];
+                    break;
                 }
             }
         } catch (IOException e) {
