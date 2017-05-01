@@ -15,10 +15,9 @@ public class DisplayManager {
     //pretty obvious what this is gonna do
     public static void createDisplay(){
 
-        ContextAttribs attribs = new ContextAttribs(4 ,4);
-        attribs.withForwardCompatible(true);
-        attribs.withProfileCore(true);
-        Display.setTitle("Random fucking game");
+        ContextAttribs attribs = new ContextAttribs(4 ,4)
+                .withForwardCompatible(true).withProfileCore(true);
+        Display.setTitle("Highlander");
         try {
             Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
             Display.create(new PixelFormat(), attribs);

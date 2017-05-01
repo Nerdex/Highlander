@@ -91,8 +91,8 @@ public class Loader {
         int vboID = GL15.glGenBuffers();
         vbos.add(vboID);
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER_BINDING, vboID);
-        IntBuffer buffer = storeDataInIntBuffer(indicies);
-        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
+        IntBuffer buffer1 = storeDataInIntBuffer(indicies);
+        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer1, GL15.GL_STATIC_DRAW);
     }
 
     //storing in a int buffer
