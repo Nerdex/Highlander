@@ -3,6 +3,7 @@ package me.rtn.renderengine.testinggrounds;
 import kotlin.Unit;
 import me.rtn.renderengine.DisplayManager;
 import me.rtn.renderengine.Loader;
+import me.rtn.renderengine.OBJLoader;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.Renderer;
 import me.rtn.renderengine.models.TexturedModel;
@@ -22,35 +23,13 @@ public class MainGameLoop {
         Renderer render = new Renderer();
         StaticShader shader = new StaticShader();
 
-        float[] verticies = {
-                //left triangle bottom
-                -0.5F, 0.5F, 0F,
-                -0.5F, -0.5F, 0F,
-                0.5F, -0.5F, 0f,
-                //right triangle
-                0.5F, -0.5F, 0f,
-                0.5F, 0.5F, 0f,
-                -0.5F, 0.5F, 0f
-                //this actually renders as a quad lol
-        };
-        int[] indicies = {
-                //V0, V1, V3
-                0,1,3,
-                //V3,V1,V2
-                3,1,2
-        };
 
-        float[] texturedCoords = {
-                0,0, //V0
-                0,1, //V1
-                1,1, //V2
-                1,0  //V3
-        };
 
         //Defining the fucking models
-        RawModel model = loader.loadToVAO(verticies, texturedCoords, indicies); //TODO: figure out why this is throwing a compile error
-        ModelTexture texture = new ModelTexture(loader.loadTexture("image"));
+        RawModel model = OBJLoader.loadObjModel("stall", loader);
+        ModelTexture texture = new ModelTexture(loader.loadTexture("stallTexture"));
         TexturedModel tModel = new TexturedModel(model, texture);
+        
 
         while(!Display.isCloseRequested()){
             render.prepare();
