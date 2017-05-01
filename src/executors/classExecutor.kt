@@ -1,8 +1,25 @@
-package executors
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
+import java.util.function.Supplier
 
-import me.rtn.renderengine.testinggrounds.MainGameLoop
+class ProcessExecutor(private val executor: Executor) {
+    suspend fun execute(processBuilder: ProcessBuilder): Int =
+            CompletableFuture.supplyAsync(Supplier {
+                Thread.sleep(1000) // simulating a slow command
+                processBuilder.start().waitFor()
+            }, executor).numberOfDependents;
+}
 
-/**
- * Created by George on 28-Apr-17 on Apr at 12:22 AM.
- */
-val classLoc = MainGameLoop.main(System.load("MainGameLoop.java"))
+fun main(args: Array<String>) {
+    val executor = Executors.newFixedThreadPool(4)
+    runBlocking {
+        val processBuilder = ProcessBuilder("cmd", "/C", "dir")
+                .inheritIO()
+        val result = ProcessExecutor(executor).javaClass;
+        println("Result: $result")
+    }
+    executor.shutdown()
+}
+
+fun  runBlocking(function: () -> Unit) {}
