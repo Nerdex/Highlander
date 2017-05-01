@@ -1,5 +1,8 @@
 package me.rtn.renderengine.shaders;
 
+import com.sun.javafx.geom.Vec3f;
+import javafx.scene.transform.MatrixType;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
@@ -7,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Created by George on 26-Apr-17 on Apr at 10:25 PM.
@@ -17,6 +21,7 @@ public abstract class ShaderProgram {
     private int vertexShaderID;
     private int fragmentShaderID;
 
+    private FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
 
     public ShaderProgram(String vertexFile, String fragmentFile){
         vertexShaderID = loadShader(vertexFile, GL20.GL_VERTEX_SHADER);
@@ -27,7 +32,36 @@ public abstract class ShaderProgram {
         bindAttributes();
         GL20.glLinkProgram(pID);
         GL20.glValidateProgram(pID);
+        getAllUniformLocations();
 
+    }
+    //assigning uniforms to shaders
+    protected abstract void getAllUniformLocations();
+
+    protected int getUniformLocation(String unfiromName){
+        return GL20.glGetUniformLocation(pID, unfiromName);
+    }
+
+    protected void loadUiFloat(int location, float value){
+        GL20.glUniform1f(location, value);
+    }
+
+    protected void loadUiVector(int location, Vec3f vector){
+        GL20.glUniform3f(location,vector.x, vector.y, vector.z);
+    }
+
+    protected void loadUiBoolean(int location, boolean value){
+        float toLoad = 0;
+        if(value){
+            toLoad = 1;
+        }
+        GL20.glUniform1f(location, toLoad);
+    }
+
+    protected void loadUiMatrix(int location, MatrixType matrix){
+        matrix = MatrixType.MT_3D_4x4;
+        matrixBuffer.flip();
+        GL20.glUniformMatrix4(location, false, matrixBuffer);
     }
 
     //general starting/stopping shaders
