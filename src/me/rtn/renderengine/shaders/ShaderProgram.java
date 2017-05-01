@@ -1,11 +1,11 @@
 package me.rtn.renderengine.shaders;
 
 import com.sun.javafx.geom.Vec3f;
-import javafx.scene.transform.MatrixType;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
+import javax.vecmath.Matrix4f;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -58,8 +58,7 @@ public abstract class ShaderProgram {
         GL20.glUniform1f(location, toLoad);
     }
 
-    protected void loadUiMatrix(int location, MatrixType matrix){
-        matrix = MatrixType.MT_3D_4x4;
+    protected void loadUiMatrix(int location, Matrix4f matrix){;
         matrixBuffer.flip();
         GL20.glUniformMatrix4(location, false, matrixBuffer);
     }
