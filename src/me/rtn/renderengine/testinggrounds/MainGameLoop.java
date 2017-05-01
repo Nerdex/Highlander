@@ -29,7 +29,7 @@ public class MainGameLoop {
         RawModel model = OBJLoader.loadObjModel("stall", loader);
         ModelTexture texture = new ModelTexture(loader.loadTexture("stallTexture"));
         TexturedModel tModel = new TexturedModel(model, texture);
-        
+
 
         while(!Display.isCloseRequested()){
             render.prepare();
