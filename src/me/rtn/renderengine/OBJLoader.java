@@ -1,7 +1,5 @@
 package me.rtn.renderengine;
 
-import me.rtn.renderengine.models.RawModel;
-
 import javax.vecmath.Vector2f;
 import javax.vecmath.Vector3f;
 import java.io.*;
@@ -13,7 +11,7 @@ import java.util.List;
  */
 public class OBJLoader {
 
-    public static RawModel loadObjModel(String fileName, Loader loader){
+    public static FileReader loadObjModel(String fileName, Loader loader){
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(new File("me/rtn/models/3d" + fileName + ".obj"));
@@ -51,9 +49,25 @@ public class OBJLoader {
                     break;
                 }
             }
+            while(line != null){
+                if(!line.startsWith("f ")){
+                    reader.readLine();
+                    continue;
+                }
+                String[] currentLine = line.split(" ");
+                String[] vertex1 = currentLine[1].split("/");
+                String[] vertex2 = currentLine[1].split("/");
+                String[] vertex3 = currentLine[1].split("/");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return fileReader;
+    }
 
+    private void processVertex(String[] vertexData, List<Integer> indices, List<Vector2f> textures, List<Vector3f> normals, float[] textureArray, float[] normalsArray){
+        int currentVertexPointer = Integer.parseInt(vertexData[0]) - 1;
+        indices.add(currentVertexPointer);
+        Vector2f currentTexture = textures.get(Integer.parseInt(vertexData[1]) - 1);
     }
 }
