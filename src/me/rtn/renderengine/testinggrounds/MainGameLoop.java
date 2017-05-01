@@ -4,13 +4,16 @@ import kotlin.Unit;
 import me.rtn.renderengine.DisplayManager;
 import me.rtn.renderengine.Loader;
 import me.rtn.renderengine.OBJLoader;
-import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.Renderer;
+import me.rtn.renderengine.entities.Entity;
+import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
-import me.rtn.renderengine.textures.ModelTexture;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.Display;
+
+import javax.vecmath.Vector3f;
+
 /**
  * Created by George on 25-Apr-17 on Apr at 11:31 PM.
  */
@@ -27,14 +30,14 @@ public class MainGameLoop {
 
         //Defining the fucking models
         RawModel model = OBJLoader.loadObjModel("stall", loader);
-        ModelTexture texture = new ModelTexture(loader.loadTexture("stallTexture"));
-        TexturedModel tModel = new TexturedModel(model, texture);
-
-
+        TexturedModel tModel = new TexturedModel(model, new TexturedModel(loader.loadTexture("stallTexture")));
+        Entity entity = new Entity(tModel, new Vector3f(0,0,-50),0,0,0,1);
         while(!Display.isCloseRequested()){
+            entity.increasePosition(0.002F, 0,0);
+            entity.increateRotation(0.002F, 0, 0);
             render.prepare();
             shader.start();
-            render.render(tModel);
+            render.render(entity, shader);
             shader.stop();
             DisplayManager.updateDisplay();
         }

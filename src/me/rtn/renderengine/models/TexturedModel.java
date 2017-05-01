@@ -10,9 +10,11 @@ public class TexturedModel {
     private RawModel model;
     private ModelTexture texture;
 
-    public TexturedModel(RawModel model, ModelTexture texture){
+    public TexturedModel(RawModel model, TexturedModel texture){
         this.model = model;
-        this.texture = texture;
+    }
+
+    public TexturedModel(int stallTexture) {
     }
 
     public RawModel getRawModel(){

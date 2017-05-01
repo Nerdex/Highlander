@@ -23,6 +23,27 @@ public class Entity {
         this.scale = scale;
     }
 
+    public TexturedModel getModel() {
+        return model;
+    }
+
+    public void setModel(TexturedModel model) {
+        this.model = model;
+    }
+
+    public void increasePosition(float dx, float dy, float dz){
+        this.position.x += dx;
+        this.position.y += dy;
+
+        this.position.z += dz;
+    }
+
+    public void increateRotation(float dx, float dy, float dz){
+        this.rotX += dx;
+        this.rotY += dy;
+        this.rotZ += dz;
+    }
+
     public Vector3f getPosition() {
         return position;
     }
