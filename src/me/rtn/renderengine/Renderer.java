@@ -23,7 +23,6 @@ public class Renderer {
     //rendering the raw model
     public void render(TexturedModel texturedModelModel){
 
-
         RawModel model = texturedModelModel.getRawModel();
         GL30.glBindVertexArray(model.getVaoID());
         GL20.glEnableVertexAttribArray(0);

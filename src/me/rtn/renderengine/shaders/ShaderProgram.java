@@ -24,9 +24,10 @@ public abstract class ShaderProgram {
         pID = GL20.glCreateProgram();
         GL20.glAttachShader(pID, vertexShaderID);
         GL20.glAttachShader(pID, fragmentShaderID);
+        bindAttributes();
         GL20.glLinkProgram(pID);
         GL20.glValidateProgram(pID);
-        bindAttributes();
+
     }
 
     //general starting/stopping shaders
