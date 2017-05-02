@@ -52,14 +52,14 @@ public class Renderer {
         float aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
         float yScale = (float) (1f / Math.tan(Math.toRadians(FOV / 2F)) * aspectRatio);
         float xScale = yScale / aspectRatio;
-        float frustusm_length = FAR_PLANE / NEAR_PLANE;
+        float frustum_length = FAR_PLANE / NEAR_PLANE;
 
         projectionMatrix = new Matrix4f();
         projectionMatrix.m00 = xScale;
         projectionMatrix.m11 = yScale;
-        projectionMatrix.m22 = -((FAR_PLANE + NEAR_PLANE) / frustusm_length);
+        projectionMatrix.m22 = -((FAR_PLANE + NEAR_PLANE) / frustum_length);
         projectionMatrix.m23 = -1;
-        projectionMatrix.m32 = -((2 * NEAR_PLANE / FAR_PLANE) / frustusm_length);
+        projectionMatrix.m32 = -((2 * NEAR_PLANE / FAR_PLANE) / frustum_length);
         projectionMatrix.m33 = 0;
     }
 }
