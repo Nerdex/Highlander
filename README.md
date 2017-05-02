@@ -1,7 +1,7 @@
 # Highlander
 Highlander is an open source 3D sandbox game. Currently being written in Java with the use of openGL and LWJGL.
 
-#License #
+License 
 MIT
 The MIT License
 
