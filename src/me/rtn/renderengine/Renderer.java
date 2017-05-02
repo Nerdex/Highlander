@@ -6,10 +6,7 @@ import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
 import me.rtn.renderengine.utils.Maths;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
+import org.lwjgl.opengl.*;
 
 import javax.vecmath.Matrix4f;
 
@@ -18,6 +15,11 @@ import javax.vecmath.Matrix4f;
  */
 @ManagedData
 public class Renderer {
+
+    private final float FOV = 100;
+    private final float NEAR_PLANE = 0.01F;
+    private final float FAR_PLANE = 100;
+    private Matrix4f projectionMatrix;
 
     //clearing the previous frames of any colours left behind
     public void prepare(){
@@ -44,5 +46,20 @@ public class Renderer {
         GL20.glDisableVertexAttribArray(0);
         GL20.glDisableVertexAttribArray(1);
         GL30.glBindVertexArray(0);
+    }
+
+    private void createProjectionMatrix(){
+        float aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
+        float yScale = (float) (1f / Math.tan(Math.toRadians(FOV / 2F)) * aspectRatio);
+        float xScale = yScale / aspectRatio;
+        float frustusm_length = FAR_PLANE / NEAR_PLANE;
+
+        projectionMatrix = new Matrix4f();
+        projectionMatrix.m00 = xScale;
+        projectionMatrix.m11 = yScale;
+        projectionMatrix.m22 = -((FAR_PLANE + NEAR_PLANE) / frustusm_length);
+        projectionMatrix.m23 = -1;
+        projectionMatrix.m32 = -((2 * NEAR_PLANE / FAR_PLANE) / frustusm_length);
+        projectionMatrix.m33 = 0;
     }
 }
