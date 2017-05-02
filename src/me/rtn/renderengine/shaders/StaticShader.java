@@ -1,6 +1,9 @@
 package me.rtn.renderengine.shaders;
 
 
+import me.rtn.renderengine.entities.Camera;
+import me.rtn.renderengine.utils.Maths;
+
 import javax.vecmath.Matrix4f;
 
 /**
@@ -13,6 +16,7 @@ public class StaticShader extends ShaderProgram {
 
     private int location_transformationMatrix;
     private int location_projectMatrix;
+    private int location_viewMatrix;
 
     public StaticShader() {
         super(VERTEX_FILE, FRAG_FILE);
@@ -22,12 +26,18 @@ public class StaticShader extends ShaderProgram {
     protected void getAllUniformLocations() {
         location_transformationMatrix = super.getUniformLocation("transformationMatrix");
         location_projectMatrix = super.getUniformLocation("projectionMatrix");
+        location_viewMatrix = super.getUniformLocation("viewMatrix");
     }
 
     @Override
     protected void bindAttributes() {
         super.bindAttribute(0, "position");
         super.bindAttribute(1, "textureCoords");
+    }
+
+    public void loadViewMatrix(Camera camera){
+        Matrix4f viewMatrix = Maths.createViewMatrix(camera);
+        super.loadUiMatrix(location_viewMatrix, viewMatrix);
     }
 
     public void loadTransformationMatrix(Matrix4f matrix){

@@ -12,13 +12,11 @@ public class Camera {
     private Vector3f position = new Vector3f(0,0,0);
     private float pitch;
     private float yaw;
-    private float roll;
 
-    public Camera(Vector3f position, float pitch, float yaw, float roll) {
+    public Camera() {
         this.position = position;
         this.pitch = pitch;
         this.yaw = yaw;
-        this.roll = roll;
     }
 
     public void move(){
@@ -57,11 +55,4 @@ public class Camera {
         this.yaw = yaw;
     }
 
-    public float getRoll() {
-        return roll;
-    }
-
-    public void setRoll(float roll) {
-        this.roll = roll;
-    }
 }

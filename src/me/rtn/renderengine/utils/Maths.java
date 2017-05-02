@@ -21,7 +21,7 @@ public class Maths {
         return matrix;
     }
 
-    public Matrix4f createViewMatrix(Camera camera){
+    public static Matrix4f createViewMatrix(Camera camera){
         Matrix4f viewMatrix = new Matrix4f();
         viewMatrix.setIdentity();
         viewMatrix.rotX(1);

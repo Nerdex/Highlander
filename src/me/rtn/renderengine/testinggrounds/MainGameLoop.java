@@ -5,6 +5,7 @@ import me.rtn.renderengine.DisplayManager;
 import me.rtn.renderengine.Loader;
 import me.rtn.renderengine.OBJLoader;
 import me.rtn.renderengine.Renderer;
+import me.rtn.renderengine.entities.Camera;
 import me.rtn.renderengine.entities.Entity;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
@@ -29,11 +30,16 @@ public class MainGameLoop {
         RawModel model = OBJLoader.loadObjModel("stall", loader);
         TexturedModel tModel = new TexturedModel(model, new TexturedModel(loader.loadTexture("stallTexture")));
         Entity entity = new Entity(tModel, new Vector3f(0,0,-50),0,0,0,1);
+
+        Camera camera = new Camera();
+
         while(!Display.isCloseRequested()){
             entity.increasePosition(0.002F, 0,0);
             entity.increateRotation(0.002F, 0, 0);
+            camera.move();
             render.prepare();
             shader.start();
+            shader.loadViewMatrix(camera);
             render.render(entity, shader);
             shader.stop();
             DisplayManager.updateDisplay();
