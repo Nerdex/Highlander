@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
 import javax.vecmath.Matrix4f;
+import javax.vecmath.Vector3f;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -46,7 +47,7 @@ public abstract class ShaderProgram {
         GL20.glUniform1f(location, value);
     }
 
-    protected void loadUiVector(int location, Vec3f vector){
+    protected void loadUiVector(int location, Vector3f vector){
         GL20.glUniform3f(location,vector.x, vector.y, vector.z);
     }
 
