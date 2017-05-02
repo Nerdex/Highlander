@@ -23,12 +23,9 @@ public class MainGameLoop {
 
         DisplayManager.createDisplay();
         Loader loader = new Loader();
-        Renderer render = new Renderer();
         StaticShader shader = new StaticShader();
+        Renderer render = new Renderer(shader);
 
-
-
-        //Defining the fucking models
         RawModel model = OBJLoader.loadObjModel("stall", loader);
         TexturedModel tModel = new TexturedModel(model, new TexturedModel(loader.loadTexture("stallTexture")));
         Entity entity = new Entity(tModel, new Vector3f(0,0,-50),0,0,0,1);

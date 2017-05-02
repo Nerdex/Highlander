@@ -1,5 +1,7 @@
 package me.rtn.renderengine.utils;
 
+import me.rtn.renderengine.entities.Camera;
+
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
@@ -17,5 +19,17 @@ public class Maths {
         matrix.rotZ(rz);
         matrix.setScale(scale);
         return matrix;
+    }
+
+    public Matrix4f createViewMatrix(Camera camera){
+        Matrix4f viewMatrix = new Matrix4f();
+        viewMatrix.setIdentity();
+        viewMatrix.rotX(1);
+        viewMatrix.rotY(-1);
+        viewMatrix.rotZ(0);
+        Vector3f cameraPos = camera.getPosition();
+        Vector3f negativeCameraPos = new Vector3f(-cameraPos.x, -cameraPos.y, -cameraPos.z);
+        viewMatrix.setTranslation(negativeCameraPos);
+        return viewMatrix;
     }
 }

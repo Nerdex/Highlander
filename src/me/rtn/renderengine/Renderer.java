@@ -21,6 +21,13 @@ public class Renderer {
     private final float FAR_PLANE = 100;
     private Matrix4f projectionMatrix;
 
+    public Renderer(StaticShader shader){
+        createProjectionMatrix();
+        shader.start();
+        shader.loadProjectMatrix(projectionMatrix);
+        shader.stop();
+    }
+
     //clearing the previous frames of any colours left behind
     public void prepare(){
         GL11.glClearColor(1,0,0,1);
