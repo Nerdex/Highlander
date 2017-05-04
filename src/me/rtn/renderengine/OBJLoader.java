@@ -34,7 +34,7 @@ public class OBJLoader {
             while (true) {
                 line = reader.readLine();
                 String[] currentLine = line.split(" ");
-                if (line.startsWith("v")) {
+                if (line.startsWith("v ")) {
                     Vector3f vertex = new Vector3f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]),
                             Float.parseFloat(currentLine[3]));
                     verticies.add(vertex);
