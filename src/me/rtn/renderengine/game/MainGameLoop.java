@@ -1,4 +1,4 @@
-package me.rtn.renderengine.testinggrounds;
+package me.rtn.renderengine.game;
 
 import kotlin.Unit;
 import me.rtn.renderengine.DisplayManager;
