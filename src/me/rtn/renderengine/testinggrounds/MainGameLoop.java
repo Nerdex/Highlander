@@ -11,6 +11,7 @@ import me.rtn.renderengine.entities.Light;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
+import me.rtn.renderengine.textures.ModelTexture;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.Display;
 
@@ -30,6 +31,11 @@ public class MainGameLoop {
 
         RawModel model = OBJLoader.loadObjModel("stall", loader);
         TexturedModel tModel = new TexturedModel(model, new TexturedModel(loader.loadTexture("stallTexture")));
+        ModelTexture modelTexture = tModel.getTexture();
+
+        modelTexture.setShineDamper(10);
+        modelTexture.setRelfectivity(1);
+
         Entity entity = new Entity(tModel, new Vector3f(0,0,-50),0,0,0,1);
         Light light = new Light(new Vector3f(0,0,-20), new Vector3f(1,1,1));
         Camera camera = new Camera();
