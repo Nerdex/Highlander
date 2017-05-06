@@ -31,6 +31,16 @@ public class MasterRenderer {
 
     private Map<TexturedModel, List<Entity>> entites = new HashMap<TexturedModel,  List<Entity>>();
 
+    public void render(Light sun, Camera camera){
+        renderer.prepare();
+        shader.start();
+        shader.loadLight(sun);
+        shader.loadViewMatrix(camera);
+
+        shader.stop();
+        entites.clear();
+    }
+
     public void cleanUp(){
         shader.clean();
     }
