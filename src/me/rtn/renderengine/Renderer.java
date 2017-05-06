@@ -5,6 +5,7 @@ import me.rtn.renderengine.entities.Entity;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
+import me.rtn.renderengine.textures.ModelTexture;
 import me.rtn.renderengine.utils.Maths;
 import org.lwjgl.opengl.*;
 
@@ -48,6 +49,8 @@ public class Renderer {
         Matrix4f transformationMatrix = Maths.createTransformationMatrix(entity.getPosition(), entity.getRotX(), entity.getRotY(),
                 entity.getRotZ(), entity.getScale());
         shader.loadTransformationMatrix(transformationMatrix);
+        ModelTexture texture = model.getTexture();
+        shader.loadShine(texture.getShineDamper(), texture.getRelfectivity());
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getTextureID());
         GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, rawModel.getVertexCount());
