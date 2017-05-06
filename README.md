@@ -33,3 +33,4 @@ Highlander is made open source for the purpose of learning. The game is currentl
 2) Can I distribute it? A: If you want to feel free. It is basic lwjgl and openGL with some rendering involved.
 3) Why is it licensed if we can use/distribute it? A: I don't really want people taking it line by line and saying "HEY I MADE THIS ALL BY MYSELF" that's just really stupid.
 4) Will you follow me on twitter? A: No but you can follow me ;)
+5) Do you recomend Java for games? A: HELL NO
