@@ -1,6 +1,5 @@
 package me.rtn.renderengine;
 
-import com.sun.org.glassfish.gmbal.ManagedData;
 import me.rtn.renderengine.entities.Entity;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
@@ -14,7 +13,6 @@ import javax.vecmath.Matrix4f;
 /**
  * Created by George on 26-Apr-17 on Apr at 2:14 AM.
  */
-@ManagedData
 public class Renderer {
 
     private final float FOV = 100;
@@ -23,6 +21,8 @@ public class Renderer {
     private Matrix4f projectionMatrix;
 
     public Renderer(StaticShader shader){
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glCullFace(GL11.GL_BACK);
         createProjectionMatrix();
         shader.start();
         shader.loadProjectMatrix(projectionMatrix);
