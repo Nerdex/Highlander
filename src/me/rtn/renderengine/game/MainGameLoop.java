@@ -6,7 +6,7 @@ import me.rtn.renderengine.OBJLoader;
 import me.rtn.renderengine.entities.Camera;
 import me.rtn.renderengine.entities.Entity;
 import me.rtn.renderengine.entities.Light;
-import me.rtn.renderengine.entities.MasterRenderer;
+import me.rtn.renderengine.MasterRenderer;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
@@ -50,7 +50,7 @@ public class MainGameLoop {
 
             for(Entity cube : allCubes){
                 render.processEntities(cube);
-                
+
             }
             render.render(light, camera);
             DisplayManager.updateDisplay();

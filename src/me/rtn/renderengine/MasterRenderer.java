@@ -1,4 +1,4 @@
-package me.rtn.renderengine.entities;/*
+package me.rtn.renderengine;/*
  * 3DGa,e
  * Copyright (C) 2017 RapidTheNerd
  *
@@ -16,7 +16,9 @@ package me.rtn.renderengine.entities;/*
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import me.rtn.renderengine.Renderer;
+import me.rtn.renderengine.entities.Camera;
+import me.rtn.renderengine.entities.Entity;
+import me.rtn.renderengine.entities.Light;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
 
