@@ -1,63 +1,62 @@
 package me.rtn.renderengine.game;
 
-import kotlin.Unit;
 import me.rtn.renderengine.DisplayManager;
 import me.rtn.renderengine.Loader;
 import me.rtn.renderengine.OBJLoader;
-import me.rtn.renderengine.Renderer;
 import me.rtn.renderengine.entities.Camera;
 import me.rtn.renderengine.entities.Entity;
 import me.rtn.renderengine.entities.Light;
+import me.rtn.renderengine.entities.MasterRenderer;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
-import me.rtn.renderengine.textures.ModelTexture;
-import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.Display;
 
 import javax.vecmath.Vector3f;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by George on 25-Apr-17 on Apr at 11:31 PM.
  */
 public class MainGameLoop {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         DisplayManager.createDisplay();
         Loader loader = new Loader();
         StaticShader shader = new StaticShader();
-        Renderer render = new Renderer(shader);
 
-        RawModel model = OBJLoader.loadObjModel("stall", loader);
-        TexturedModel tModel = new TexturedModel(model, new TexturedModel(loader.loadTexture("stallTexture")));
-        ModelTexture modelTexture = tModel.getTexture();
+        RawModel model = OBJLoader.loadObjModel("ColourCube", loader);
+        TexturedModel cubeModel = new TexturedModel(model, new TexturedModel(loader.loadTexture("image.png")));
 
-        modelTexture.setShineDamper(10);
-        modelTexture.setRelfectivity(1);
+        Light light = new Light(new Vector3f(3000, 2000, 3000), new Vector3f(1,1,1));
 
-        Entity entity = new Entity(tModel, new Vector3f(0,0,-50),0,0,0,1);
-        Light light = new Light(new Vector3f(0,0,-20), new Vector3f(1,1,1));
         Camera camera = new Camera();
 
-        while(!Display.isCloseRequested()){
-            entity.increasePosition(0.002F, 0,0);
-            entity.increateRotation(0.002F, 0, 0);
+        List<Entity> allCubes = new ArrayList<Entity>();
+        Random random = new Random();
+
+        for(int i = 0; i < 200; i++){
+            float x = random.nextFloat() * 100 - 50;
+            float y = random.nextFloat() * 100 - 50;
+            float z = random.nextFloat() * -300;
+            allCubes.add(new Entity(cubeModel, new Vector3f(x, y, z), random.nextFloat() * 180F, random.nextFloat() * 180F, 0F, 1F));
+        }
+        MasterRenderer render = new MasterRenderer();
+        while (!Display.isCloseRequested()){
             camera.move();
-            render.prepare();
-            shader.start();
-            shader.loadLight(light);
-            shader.loadViewMatrix(camera);
-            render.render(entity, shader);
-            shader.stop();
+
+            for(Entity cube : allCubes){
+                render.processEntities(cube);
+                
+            }
+            render.render(light, camera);
             DisplayManager.updateDisplay();
         }
-        shader.clean();
+        render.cleanUp();
         loader.cleaner();
         DisplayManager.disposeDisply();
-    }
-    //ignore this shit for now
-    public static void main(@NotNull Unit load) {
-
     }
 }
