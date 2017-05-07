@@ -15,7 +15,6 @@ import org.lwjgl.opengl.Display;
 
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -28,41 +27,41 @@ public class MainGameLoop {
         DisplayManager.createDisplay();
         Loader loader = new Loader();
 
-        RawModel model = OBJLoader.loadObjModel("dragon", loader);
-        TexturedModel cubeModel = new TexturedModel(model, new TexturedModel(loader.loadTexture("image.png")));
 
+        RawModel model = OBJLoader.loadObjModel("tree", loader);
 
+        TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("tree")));
 
-        Light light = new Light(new Vector3f(3000, 2000, 3000), new Vector3f(1,1,1));
+        ArrayList<Entity> entities = new ArrayList<Entity>();
+        Random random = new Random();
+        for(int i=0;i<500;i++){
+            entities.add(new Entity(staticModel, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
+        }
+
+        Light light = new Light(new Vector3f(20000,20000,2000),new Vector3f(1,1,1));
+
+        Terrain terrain = new Terrain(0,0,loader,new ModelTexture(loader.loadTexture("grass")));
+        Terrain terrain2 = new Terrain(1,0,loader,new ModelTexture(loader.loadTexture("grass")));
 
         Camera camera = new Camera();
+        MasterRenderer renderer = new MasterRenderer();
 
-        List<Entity> allCubes = new ArrayList<Entity>();
-        Random random = new Random();
-
-        for(int i = 0; i < 200; i++){
-            float x = random.nextFloat() * 100 - 50;
-            float y = random.nextFloat() * 100 - 50;
-            float z = random.nextFloat() * -300;
-            allCubes.add(new Entity(cubeModel, new Vector3f(x, y, z), random.nextFloat() * 180F, random.nextFloat() * 180F, 0F, 1F));
-        }
-
-        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass")));
-        Terrain terrain2 = new Terrain(1, 0, loader, new ModelTexture(loader.loadTexture("grass")));
-
-        MasterRenderer render = new MasterRenderer();
-        while (!Display.isCloseRequested()){
+        while(!Display.isCloseRequested()){
             camera.move();
 
-            for(Entity cube : allCubes){
-                render.processEntities(cube);
-
+            renderer.processTerrains(terrain);
+            renderer.processTerrains(terrain2);
+            for(Entity entity:entities){
+                renderer.processEntities(entity);
             }
-            render.render(light, camera);
+            renderer.render(light, camera);
             DisplayManager.updateDisplay();
         }
-        render.cleanUp();
+
+        renderer.cleanUp();
         loader.cleaner();
         DisplayManager.disposeDisply();
+
     }
+
 }
