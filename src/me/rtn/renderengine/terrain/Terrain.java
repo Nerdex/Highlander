@@ -30,7 +30,7 @@ public class Terrain {
     private RawModel model;
     private ModelTexture texture;
 
-    public Terrain(int gridX, int gridZ, Loader loader, RawModel model, ModelTexture texture) {
+    public Terrain(int gridX, int gridZ, Loader loader, ModelTexture texture) {
         this.texture = texture;
         this.x = gridX * SIZE;
         this.z = gridZ * SIZE;

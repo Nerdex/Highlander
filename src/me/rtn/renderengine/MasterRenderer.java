@@ -21,7 +21,10 @@ import me.rtn.renderengine.entities.Entity;
 import me.rtn.renderengine.entities.Light;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 
+import javax.vecmath.Matrix4f;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,13 +32,26 @@ import java.util.Map;
 
 public class MasterRenderer {
 
+    private final float FOV = 100;
+    private final float NEAR_PLANE = 0.01F;
+    private final float FAR_PLANE = 100;
+
+    private Matrix4f projectionMatrix;
+
     private StaticShader shader = new StaticShader();
-    private Renderer renderer = new Renderer(shader);
+    private EntityRenderer renderer;
+
+    public MasterRenderer(){
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glCullFace(GL11.GL_BACK);
+        createProjectionMatrix();
+        renderer = new EntityRenderer(shader, projectionMatrix);
+    }
 
     private Map<TexturedModel, List<Entity>> entities = new HashMap<TexturedModel,  List<Entity>>();
 
     public void render(Light sun, Camera camera){
-        renderer.prepare();
+        prepare();
         shader.start();
         shader.loadLight(sun);
         shader.loadViewMatrix(camera);
@@ -45,6 +61,29 @@ public class MasterRenderer {
         shader.stop();
         entities.clear();
     }
+
+    public void prepare(){
+        GL11.glClearColor(1,0,0,1);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+    }
+
+    private void createProjectionMatrix(){
+        float aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
+        float yScale = (float) (1f / Math.tan(Math.toRadians(FOV / 2F)) * aspectRatio);
+        float xScale = yScale / aspectRatio;
+        float frustum_length = FAR_PLANE / NEAR_PLANE;
+
+        projectionMatrix = new Matrix4f();
+        projectionMatrix.m00 = xScale;
+        projectionMatrix.m11 = yScale;
+        projectionMatrix.m22 = -((FAR_PLANE + NEAR_PLANE) / frustum_length);
+        projectionMatrix.m23 = -1;
+        projectionMatrix.m32 = -((2 * NEAR_PLANE / FAR_PLANE) / frustum_length);
+        projectionMatrix.m33 = 0;
+    }
+
+
 
     public void processEntities(Entity entity){
         TexturedModel entityModel = entity.getModel();

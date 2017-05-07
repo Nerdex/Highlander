@@ -15,20 +15,22 @@ import java.util.Map;
 /**
  * Created by George on 26-Apr-17 on Apr at 2:14 AM.
  */
-public class Renderer {
+public class EntityRenderer {
 
-
-    private Matrix4f projectionMatrix;
+    private final float FOV = 100;
+    private final float NEAR_PLANE = 0.01F;
+    private final float FAR_PLANE = 100;
     private StaticShader staticShader;
 
-    public Renderer(StaticShader shader){
+    public EntityRenderer(StaticShader shader, Matrix4f projectionMatrix){
         this.staticShader = shader;
-        GL11.glEnable(GL11.GL_CULL_FACE);
-        GL11.glCullFace(GL11.GL_BACK);
-        shader.start();
         shader.loadProjectMatrix(projectionMatrix);
+        shader.start();
         shader.stop();
     }
+
+    //clearing the previous frames of any colours left behind
+
     //rendering the models
     public void render(Map<TexturedModel, List<Entity>> entities){
         for(TexturedModel model : entities.keySet()){
@@ -67,4 +69,5 @@ public class Renderer {
                 entity.getRotZ(), entity.getScale());
         staticShader.loadTransformationMatrix(transformationMatrix);
     }
+
 }
