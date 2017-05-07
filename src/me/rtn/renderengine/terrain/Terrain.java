@@ -16,6 +16,7 @@ package me.rtn.renderengine.terrain;/*
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import me.rtn.renderengine.Loader;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.textures.ModelTexture;
 
@@ -33,5 +34,20 @@ public class Terrain {
         this.texture = texture;
         this.x = gridX * SIZE;
         this.z = gridZ * SIZE;
+    }
+
+    private RawModel generateTerrain(Loader loader){
+        int count = VERTEX_COUNT * VERTEX_COUNT;
+        float[] verticies = new float[count * 3];
+        float[] normals = new float[count * 3];
+        float[] textureCoords = new float[count * 2];
+        int[] indicies = new int[6*(VERTEX_COUNT)*(VERTEX_COUNT - 1)];
+        int vertexPointer = 0;
+
+        for(int i = 0; i < VERTEX_COUNT; i++){
+            for(int j = 0; j < VERTEX_COUNT; j++){
+                
+            }
+        }
     }
 }
