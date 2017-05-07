@@ -28,7 +28,7 @@ public class MainGameLoop {
         Loader loader = new Loader();
         StaticShader shader = new StaticShader();
 
-        RawModel model = OBJLoader.loadObjModel("ColourCube", loader);
+        RawModel model = OBJLoader.loadObjModel("dragon", loader);
         TexturedModel cubeModel = new TexturedModel(model, new TexturedModel(loader.loadTexture("image.png")));
 
         Light light = new Light(new Vector3f(3000, 2000, 3000), new Vector3f(1,1,1));

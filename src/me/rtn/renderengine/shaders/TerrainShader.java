@@ -23,8 +23,8 @@ import me.rtn.renderengine.utils.Maths;
 import javax.vecmath.Matrix4f;
 
 public class TerrainShader extends ShaderProgram {
-    private static final String VERTEX_FILE = "src/me/rtn/renderengine/shaders/vertexShader";
-    private static final String FRAG_FILE = "src/me/rtn/renderengine/shaders/vertexShader";
+    private static final String VERTEX_FILE = "src/me/rtn/renderengine/shaders/terrainVertexShader";
+    private static final String FRAG_FILE = "src/me/rtn/renderengine/shaders/terrainFragmentShader";
 
     private int location_transformationMatrix;
     private int location_projectMatrix;
