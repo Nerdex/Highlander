@@ -17,7 +17,6 @@ package me.rtn.renderengine;/*
  */
 
 import me.rtn.renderengine.models.RawModel;
-import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.shaders.StaticShader;
 import me.rtn.renderengine.shaders.TerrainShader;
 import me.rtn.renderengine.terrain.Terrain;
@@ -46,20 +45,23 @@ public class TerrainRenderer {
 
     public void render(List<Terrain> terrains){
         for(Terrain terrain : terrains){
-
+            prepareTerrain(terrain);
+            loadModelMatrix(terrain);
+            GL11.glDrawElements(GL11.GL_TRIANGLES, terrain.getModel().getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
+            unbindTextureModel();
         }
 
     }
-    public void prepareTexturedModels(TexturedModel model){
-        RawModel rawModel = model.getRawModel();
+    public void prepareTerrain(Terrain terrain){
+        RawModel rawModel = terrain.getModel();
         GL30.glBindVertexArray(rawModel.getVaoID());
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
         GL20.glEnableVertexAttribArray(2);
-        ModelTexture texture = model.getTexture();
+        ModelTexture texture = terrain.getTexture();
         staticShader.loadShine(texture.getShineDamper(), texture.getRelfectivity());
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getTextureID());
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getTextureID());
     }
 
     public void unbindTextureModel(){

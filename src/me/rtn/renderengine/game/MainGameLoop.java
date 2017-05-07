@@ -2,14 +2,15 @@ package me.rtn.renderengine.game;
 
 import me.rtn.renderengine.DisplayManager;
 import me.rtn.renderengine.Loader;
+import me.rtn.renderengine.MasterRenderer;
 import me.rtn.renderengine.OBJLoader;
 import me.rtn.renderengine.entities.Camera;
 import me.rtn.renderengine.entities.Entity;
 import me.rtn.renderengine.entities.Light;
-import me.rtn.renderengine.MasterRenderer;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
-import me.rtn.renderengine.shaders.StaticShader;
+import me.rtn.renderengine.terrain.Terrain;
+import me.rtn.renderengine.textures.ModelTexture;
 import org.lwjgl.opengl.Display;
 
 import javax.vecmath.Vector3f;
@@ -26,10 +27,11 @@ public class MainGameLoop {
 
         DisplayManager.createDisplay();
         Loader loader = new Loader();
-        StaticShader shader = new StaticShader();
 
         RawModel model = OBJLoader.loadObjModel("dragon", loader);
         TexturedModel cubeModel = new TexturedModel(model, new TexturedModel(loader.loadTexture("image.png")));
+
+
 
         Light light = new Light(new Vector3f(3000, 2000, 3000), new Vector3f(1,1,1));
 
@@ -44,6 +46,10 @@ public class MainGameLoop {
             float z = random.nextFloat() * -300;
             allCubes.add(new Entity(cubeModel, new Vector3f(x, y, z), random.nextFloat() * 180F, random.nextFloat() * 180F, 0F, 1F));
         }
+
+        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass")));
+        Terrain terrain2 = new Terrain(1, 0, loader, new ModelTexture(loader.loadTexture("grass")));
+
         MasterRenderer render = new MasterRenderer();
         while (!Display.isCloseRequested()){
             camera.move();
