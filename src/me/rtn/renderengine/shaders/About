@@ -1,6 +1,6 @@
 To avoid confusion the files that are not a class or similar are GLSL files, they're used to help load textures,
 lighting and other stuff. IntelliJ does not support code to be written in the GLSL format, so its being read out
-of a text document and programmed within that text document. Yes no the most efficient way of doing it but it works for
+of a text document and programmed within that text document. Yes not the most efficient way of doing it but it works for
 the overall outcome of what we need them to do.
 
 If you want to add your own shaders, textures or lighting, I don't suggest copying it and replacing
