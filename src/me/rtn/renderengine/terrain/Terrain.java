@@ -46,8 +46,32 @@ public class Terrain {
 
         for(int i = 0; i < VERTEX_COUNT; i++){
             for(int j = 0; j < VERTEX_COUNT; j++){
-                
+                verticies[vertexPointer * 3] = (float) j/((float) VERTEX_COUNT - 1) * SIZE;
+                verticies[vertexPointer * 3 + 1] = 0;
+                verticies[vertexPointer * 3 + 2] = (float) i/((float) VERTEX_COUNT - 1) * SIZE;
+                normals[vertexPointer * 3] = 0;
+                normals[vertexPointer * 3 + 1] = 0;
+                normals[vertexPointer * 3 + 2] = 0;
+                textureCoords[vertexPointer * 2] = (float) j/((float) VERTEX_COUNT - 1);
+                textureCoords[vertexPointer * 2 + 1] = (float) i/((float) VERTEX_COUNT - 1);
+                vertexPointer++;
             }
         }
+        int pointer = 0;
+        for(int g = 0; g < VERTEX_COUNT - 1; g++){
+            for(int f = 0; f < VERTEX_COUNT - 1; f++){
+                int topLeft = (g * VERTEX_COUNT) + g;
+                int topRight = topLeft + 1;
+                int bottomLeft = ((g + 1) * VERTEX_COUNT) + g;
+                int bottomRight = bottomLeft + 1;
+                indicies[pointer++] = topLeft;
+                indicies[pointer++] = bottomLeft;
+                indicies[pointer++] = topRight;
+                indicies[pointer++] = topRight;
+                indicies[pointer++] = bottomLeft;
+                indicies[pointer++] = bottomRight;
+            }
+        }
+        return loader.loadToVAO(verticies, textureCoords, normals, indicies);
     }
 }
