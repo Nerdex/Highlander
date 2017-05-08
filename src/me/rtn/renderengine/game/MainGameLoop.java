@@ -14,6 +14,7 @@ import me.rtn.renderengine.textures.ModelTexture;
 import org.lwjgl.opengl.Display;
 
 import javax.vecmath.Vector3f;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,7 +23,7 @@ import java.util.Random;
  */
 public class MainGameLoop {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         DisplayManager.createDisplay();
         Loader loader = new Loader();
