@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class OBJLoader {
 
-    public static RawModel loadObjModel(String fileName, Loader loader) {
-        FileReader fileReader = null;
+    public static RawModel loadObjModel(String fileName, Loader loader) throws FileNotFoundException {
+        FileReader fileReader = new FileReader(fileName);
         try {
             fileReader = new FileReader(new File("me\\rtn\\renderengine\\models\\3d/" + fileName + ".obj"));
         } catch (FileNotFoundException e) {
