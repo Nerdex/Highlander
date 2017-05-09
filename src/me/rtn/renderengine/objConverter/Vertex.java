@@ -63,6 +63,11 @@ public class Vertex {
     public Vertex getDuplicateVertex(){
         return duplicateVertex;
     }
+
+    public int getTextureIndex(){
+        return textureIndex;
+    }
+
     public void setDuplicateVertex(Vertex duplicateVertex){
         this.duplicateVertex = duplicateVertex;
     }

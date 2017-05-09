@@ -97,8 +97,30 @@ public class OBJFileLoader {
     private float convertDataToArrays(List<Vertex> vertices, List<Vector2f> textures, List<Vector3f> normals, float[] verticesArray,
                                       float[] textureArray, float[] normalsArray){
         float furthestPoint = 0;
-        for(int i = 0; i < vertices.size(); i++){
+        for(int i = 0; i < vertices.size(); i++) {
             Vertex currentVertex = vertices.get(i);
+            if (currentVertex.getLength() > furthestPoint) {
+                furthestPoint = currentVertex.getLength();
+            }
+            Vector3f position = currentVertex.getPosition();
+            Vector2f textureCoord = textures.get(currentVertex.getTextureIndex());
+            Vector3f normalVector = normals.get(currentVertex.getNormalIndex());
+            verticesArray[i * 3] = position.x;
+            verticesArray[i * 3 + 1] = position.y;
+            verticesArray[i * 3 + 2] = position.z;
+            textureArray[i * 2] = textureCoord.x;
+            textureArray[i * 2 + 1] = 1 - textureCoord.y;
+            normalsArray[i * 3] = normalVector.x;
+            normalsArray[i * 3 + 1] = normalVector.y;
+            normalsArray[i * 3 + 2] = normalVector.z;
+        }
+        return furthestPoint;
+    }
+
+    private void dealWithProcessedVertex(Vertex previousVertex, int newTextureIndex, int newNormalIndex, List<Integer> indices, List<Vertex> vertices){
+        if(previousVertex.hasSameTextureAndNormal(newTextureIndex, newNormalIndex)){
+            indices.add(previousVertex.getIndex());
+        } else {
             
         }
     }
