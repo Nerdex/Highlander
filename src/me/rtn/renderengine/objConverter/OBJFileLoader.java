@@ -65,15 +65,26 @@ public class OBJFileLoader {
                 String[] vertex1 = currentLine[1].split("/");
                 String[] vertex2 = currentLine[2].split("/");
                 String[] vertex3 = currentLine[3].split("/");
-
+                processVertex(vertex1, vertices, indices);
+                processVertex(vertex2, vertices, indices);
+                processVertex(vertex3, vertices, indices);
+                line = bReader.readLine();
             }
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        removeUnusedVertices(vertices);
+        float[] verticesArray = new float[vertices.size() * 3];
+        float[] textureArray = new float[vertices.size() * 2];
+        float[] normalArray = new float[vertices.size() * 3];
+        float furthest = convertDataToArrays(vertices, textures, normals, verticesArray, textureArray, normalArray);
+        int[] indicesArray = convertIndicesToArray(indices);
+        ModelData data = new ModelData(verticesArray, textureArray, normalArray, indicesArray, furthest);
+        return data;
     }
 
-    private void processVertex(String[] vertex, List<Vertex> vertices, List<Integer> indices){
+    private static void processVertex(String[] vertex, List<Vertex> vertices, List<Integer> indices){
         int index = Integer.parseInt(vertex[0]) - 1;
         Vertex currnetVertex = vertices.get(index);
         int textureIndex = Integer.parseInt(vertex[1]) - 1;
@@ -94,7 +105,7 @@ public class OBJFileLoader {
         return indicesArray;
     }
 
-    private float convertDataToArrays(List<Vertex> vertices, List<Vector2f> textures, List<Vector3f> normals, float[] verticesArray,
+    private static float convertDataToArrays(List<Vertex> vertices, List<Vector2f> textures, List<Vector3f> normals, float[] verticesArray,
                                       float[] textureArray, float[] normalsArray){
         float furthestPoint = 0;
         for(int i = 0; i < vertices.size(); i++) {
@@ -117,7 +128,7 @@ public class OBJFileLoader {
         return furthestPoint;
     }
 
-    private void dealWithProcessedVertex(Vertex previousVertex, int newTextureIndex, int newNormalIndex, List<Integer> indices, List<Vertex> vertices){
+    private static void dealWithProcessedVertex(Vertex previousVertex, int newTextureIndex, int newNormalIndex, List<Integer> indices, List<Vertex> vertices){
         if(previousVertex.hasSameTextureAndNormal(newTextureIndex, newNormalIndex)){
             indices.add(previousVertex.getIndex());
         } else {
@@ -134,7 +145,7 @@ public class OBJFileLoader {
             }
         }
     }
-    private void removeUnusedVertices(List<Vertex> vertices){
+    private static void removeUnusedVertices(List<Vertex> vertices){
         for(Vertex vertex : vertices){
             if(!vertex.isSet()){
                 vertex.setTextureIndex(0);
