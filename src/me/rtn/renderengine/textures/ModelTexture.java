@@ -24,6 +24,16 @@ public class ModelTexture {
     private float shineDamper = 1;
     private float relfectivity = 0;
 
+    private boolean isTransparent = false;
+
+    public boolean isTransparent() {
+        return isTransparent;
+    }
+
+    public void setTransparent(boolean transparent) {
+        isTransparent = transparent;
+    }
+
     public float getShineDamper() {
         return shineDamper;
     }
