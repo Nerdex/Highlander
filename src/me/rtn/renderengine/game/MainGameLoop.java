@@ -49,15 +49,18 @@ public class MainGameLoop {
 
         TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grass", loader), new ModelTexture(loader.loadTexture("grassTexture")));
         grass.getTexture().setTransparent(true);
+        grass.getTexture().setUseFakeLighting(true);
+
         TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader), new ModelTexture(loader.loadTexture("fern")));
         fern.getTexture().setTransparent(true);
-        
+        fern.getTexture().setUseFakeLighting(true);
+
         ArrayList<Entity> entities = new ArrayList<Entity>();
         Random random = new Random();
         for(int i=0;i<500;i++){
             entities.add(new Entity(staticModel, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
             entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat()  * -600), 0,0,0,1));
-            entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat() * - 600), 0,0,0,0.6F)));
+            entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat() * - 600), 0,0,0,0.6F));
         }
 
 

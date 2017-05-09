@@ -25,6 +25,19 @@ public class ModelTexture {
     private float relfectivity = 0;
 
     private boolean isTransparent = false;
+    private boolean useFakeLighting = false;
+
+    public void setTextureID(int textureID) {
+        this.textureID = textureID;
+    }
+
+    public boolean isUseFakeLighting() {
+        return useFakeLighting;
+    }
+
+    public void setUseFakeLighting(boolean useFakeLighting) {
+        this.useFakeLighting = useFakeLighting;
+    }
 
     public boolean isTransparent() {
         return isTransparent;
