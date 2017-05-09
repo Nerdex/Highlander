@@ -83,6 +83,22 @@ public class OBJFileLoader {
             currnetVertex.setNormalIndex(normalIndex);
             indices.add(index);
         } else {
+
+        }
+    }
+    private static int[] convertIndicesToArray(List<Integer> indices){
+        int[] indicesArray = new int[indices.size()];
+        for(int i = 0; i < indicesArray.length; i++){
+            indicesArray[i] = indices.get(i);
+        }
+        return indicesArray;
+    }
+
+    private float convertDataToArrays(List<Vertex> vertices, List<Vector2f> textures, List<Vector3f> normals, float[] verticesArray,
+                                      float[] textureArray, float[] normalsArray){
+        float furthestPoint = 0;
+        for(int i = 0; i < vertices.size(); i++){
+            Vertex currentVertex = vertices.get(i);
             
         }
     }
