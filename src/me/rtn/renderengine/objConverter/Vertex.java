@@ -29,5 +29,23 @@ public class Vertex {
     private int index;
     private float length;
 
-    
+    public Vertex(int index, Vector3f position){
+        this.index = index;
+        this.position = position;
+        this.length = position.length();
+    }
+
+    public int getIndex(){
+        return index;
+    }
+    public float getLength(){
+        return length;
+    }
+
+    public boolean isSet(){
+        return textureIndex != NO_INDEX && normalIndex != NO_INDEX;
+    }
+    public boolean hasSameTextureAndNormal(int textureIndexOther, int normalIndexOther){
+        return textureIndexOther == textureIndex && normalIndexOther == normalIndex;
+    }
 }
