@@ -83,7 +83,7 @@ public class OBJFileLoader {
             currnetVertex.setNormalIndex(normalIndex);
             indices.add(index);
         } else {
-
+            dealWithProcessedVertex(currnetVertex, textureIndex, normalIndex, indices, vertices);
         }
     }
     private static int[] convertIndicesToArray(List<Integer> indices){
@@ -121,7 +121,25 @@ public class OBJFileLoader {
         if(previousVertex.hasSameTextureAndNormal(newTextureIndex, newNormalIndex)){
             indices.add(previousVertex.getIndex());
         } else {
-            
+            Vertex anotherDamnVertex = previousVertex.getDuplicateVertex();
+            if(anotherDamnVertex != null){
+                dealWithProcessedVertex(anotherDamnVertex, newTextureIndex, newNormalIndex, indices, vertices);
+            } else {
+                Vertex duplicateVertex = new Vertex(vertices.size(), previousVertex.getPosition());
+                duplicateVertex.setTextureIndex(newTextureIndex);
+                duplicateVertex.setNormalIndex(newNormalIndex);
+                duplicateVertex.setDuplicateVertex(duplicateVertex);
+                vertices.add(duplicateVertex);
+                indices.add(duplicateVertex.getIndex());
+            }
+        }
+    }
+    private void removeUnusedVertices(List<Vertex> vertices){
+        for(Vertex vertex : vertices){
+            if(!vertex.isSet()){
+                vertex.setTextureIndex(0);
+                vertex.setNormalIndex(0);
+            }
         }
     }
 }
