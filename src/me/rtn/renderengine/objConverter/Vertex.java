@@ -48,4 +48,22 @@ public class Vertex {
     public boolean hasSameTextureAndNormal(int textureIndexOther, int normalIndexOther){
         return textureIndexOther == textureIndex && normalIndexOther == normalIndex;
     }
+    public void setTextureIndex(int textureIndex){
+        this.textureIndex = textureIndex;
+    }
+    public void setNormalIndex(int normalIndex){
+        this.normalIndex = normalIndex;
+    }
+    public Vector3f getPosition(){
+        return position;
+    }
+    public int getNormalIndex(){
+        return normalIndex;
+    }
+    public Vertex getDuplicateVertex(){
+        return duplicateVertex;
+    }
+    public void setDuplicateVertex(Vertex duplicateVertex){
+        this.duplicateVertex = duplicateVertex;
+    }
 }
