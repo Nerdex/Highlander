@@ -9,6 +9,8 @@ import me.rtn.renderengine.entities.Entity;
 import me.rtn.renderengine.entities.Light;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
+import me.rtn.renderengine.objConverter.ModelData;
+import me.rtn.renderengine.objConverter.OBJFileLoader;
 import me.rtn.renderengine.terrain.Terrain;
 import me.rtn.renderengine.textures.ModelTexture;
 import org.lwjgl.opengl.Display;
@@ -43,9 +45,11 @@ public class MainGameLoop {
         Loader loader = new Loader();
 
 
-        RawModel model = OBJLoader.loadObjModel("tree", loader);
+        ModelData data = OBJFileLoader.loadOBJ("tree");
 
-        TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("tree")));
+        RawModel treeModel = loader.loadToVAO(data.getVertices(), data.getTextureCoords(), data.getNormals(), data.getIndices());
+
+        TexturedModel staticModel = new TexturedModel(OBJLoader.loadObjModel("tree", loader), new ModelTexture(loader.loadTexture("tree")));
 
         TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grass", loader), new ModelTexture(loader.loadTexture("grassTexture")));
         grass.getTexture().setTransparent(true);
