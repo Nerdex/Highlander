@@ -50,10 +50,40 @@ public class OBJFileLoader {
                             (float) Float.valueOf(currentLine[3]));
                     Vertex newVertex = new Vertex(vertices.size(), vertex);
                     vertices.add(newVertex);
+                } else if(line.startsWith("vt ")){
+                    String[] currentLine = line.split(" ");
+                    Vector3f normal = new Vector3f((float) Float.valueOf(currentLine[1]),
+                            (float) Float.valueOf(currentLine[2]),
+                            (float) Float.valueOf(currentLine[3]));
+                    normals.add(normal);
+                } else if(line.startsWith("f ")){
+                    break;
                 }
             }
+            while(line != null && line.startsWith("f ")){
+                String[] currentLine = line.split(" ");
+                String[] vertex1 = currentLine[1].split("/");
+                String[] vertex2 = currentLine[2].split("/");
+                String[] vertex3 = currentLine[3].split("/");
+
+            }
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void processVertex(String[] vertex, List<Vertex> vertices, List<Integer> indices){
+        int index = Integer.parseInt(vertex[0]) - 1;
+        Vertex currnetVertex = vertices.get(index);
+        int textureIndex = Integer.parseInt(vertex[1]) - 1;
+        int normalIndex = Integer.parseInt(vertex[2]) - 1;
+        if(!currnetVertex.isSet()){
+            currnetVertex.setTextureIndex(textureIndex);
+            currnetVertex.setNormalIndex(normalIndex);
+            indices.add(index);
+        } else {
+            
         }
     }
 }
