@@ -38,6 +38,11 @@ public class MasterRenderer {
     private final float NEAR_PLANE = 0.01F;
     private final float FAR_PLANE = 100;
 
+    private final float RED = 0.5F;
+    private final float GREEN = 0.5F;
+    private final float BLUE = 0.05F;
+
+
     private Matrix4f projectionMatrix;
 
     private StaticShader shader = new StaticShader();
@@ -70,7 +75,7 @@ public class MasterRenderer {
         shader.start();
         shader.loadLight(sun);
         shader.loadViewMatrix(camera);
-
+        shader.loadSkyColour(RED, GREEN, BLUE);
         renderer.render(entities);
 
         shader.stop();
@@ -87,7 +92,7 @@ public class MasterRenderer {
     }
 
     public void prepare(){
-        GL11.glClearColor(1,0,0,1);
+        GL11.glClearColor(RED, GREEN, BLUE, 1);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
     }

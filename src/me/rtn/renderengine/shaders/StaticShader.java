@@ -6,6 +6,7 @@ import me.rtn.renderengine.entities.Light;
 import me.rtn.renderengine.utils.Maths;
 
 import javax.vecmath.Matrix4f;
+import javax.vecmath.Vector3f;
 
 /*
  * 3DGa,e
@@ -37,6 +38,7 @@ public class StaticShader extends ShaderProgram {
     private int location_shineDamper;
     private int location_reflectivity;
     private int location_fakeLighting;
+    private int location_skyColour;
 
     public StaticShader() {
         super(VERTEX_FILE, FRAG_FILE);
@@ -52,6 +54,11 @@ public class StaticShader extends ShaderProgram {
         location_shineDamper = super.getUniformLocation("shineDamper");
         location_reflectivity = super.getUniformLocation("reflectivity");
         location_fakeLighting = super.getUniformLocation("fakeLighting");
+        location_skyColour = super.getUniformLocation("skyColour");
+    }
+
+    public void loadSkyColour(float r, float g, float b){
+        super.loadUiVector(location_skyColour, new Vector3f(r,g,b));
     }
 
     public void loadFakeLighting(boolean useFake){
