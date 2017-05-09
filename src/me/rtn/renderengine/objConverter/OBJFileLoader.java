@@ -18,10 +18,7 @@ package me.rtn.renderengine.objConverter;/*
 
 import javax.vecmath.Vector2f;
 import javax.vecmath.Vector3f;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,5 +40,20 @@ public class OBJFileLoader {
         List<Vector2f> textures = new ArrayList<Vector2f>();
         List<Vector3f> normals = new ArrayList<Vector3f>();
         List<Integer> indices = new ArrayList<Integer>();
+        try {
+            while(true){
+                line = bReader.readLine();
+                if(line.startsWith("v ")){
+                    String[] currentLine = line.split(" ");
+                    Vector3f vertex = new Vector3f((float) Float.valueOf(currentLine[1]),
+                            (float) Float.valueOf(currentLine[2]),
+                            (float) Float.valueOf(currentLine[3]));
+                    Vertex newVertex = new Vertex(vertices.size(), vertex);
+                    vertices.add(newVertex);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
