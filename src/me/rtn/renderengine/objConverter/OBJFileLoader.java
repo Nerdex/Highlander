@@ -24,7 +24,7 @@ import java.util.List;
 
 public class OBJFileLoader {
 
-    private static final String RES_LOC = "res/";
+    private static final String RES_LOC = "/res/";
 
     public static ModelData loadOBJ(String objFileName){
         FileReader reader = null;
