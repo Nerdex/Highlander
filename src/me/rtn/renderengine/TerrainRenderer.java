@@ -40,6 +40,7 @@ public class TerrainRenderer {
         this.shader = shader;
         shader.start();
         shader.loadProjectMatrix(projectMatrix);
+        shader.connectTextureUnits();
         shader.stop();
     }
 

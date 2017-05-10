@@ -21,6 +21,7 @@ import me.rtn.renderengine.entities.Light;
 import me.rtn.renderengine.utils.Maths;
 
 import javax.vecmath.Matrix4f;
+import javax.vecmath.Vector3f;
 
 public class TerrainShader extends ShaderProgram {
     private static final String VERTEX_FILE = "src/me/rtn/renderengine/shaders/terrainVertexShader";
@@ -33,6 +34,7 @@ public class TerrainShader extends ShaderProgram {
     private int location_lightColour;
     private int location_shineDamper;
     private int location_reflectivity;
+    private int location_Skycolour;
     private int location_backgroundTexture;
     private int location_rTexture;
     private int location_gTexture;
@@ -58,6 +60,18 @@ public class TerrainShader extends ShaderProgram {
         location_gTexture = super.getUniformLocation("gTexture");
         location_bTexture = super.getUniformLocation("bTexture");
         location_blendMap = super.getUniformLocation("blendMap");
+    }
+
+    public void connectTextureUnits(){
+        super.loadUiInt(location_backgroundTexture, 0);
+        super.loadUiInt(location_rTexture, 1);
+        super.loadUiInt(location_gTexture, 2);
+        super.loadUiInt(location_bTexture, 3);
+        super.loadUiInt(location_blendMap, 4);
+    }
+
+    public void loadSkyColour(float r, float g, float b){
+        super.loadUiVector(location_Skycolour, new Vector3f(r,g,b));
     }
 
     public void loadShine(float damper, float reflectivity){
