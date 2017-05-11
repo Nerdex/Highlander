@@ -37,6 +37,6 @@ Highlander is made open source for the purpose of learning. The game is currentl
 6) Is this ideal for new game developers? A: No, personally I suggest starting small on something like pacman or space invaders to get a feel of how game development is done before moving onto bigger projects.
 7) Do you provide support for this code? A: Sometimes, it generally depends on the issue. If the issue is something massive I highly suggest that you go out and find a way to fix it yourself, remember that debugging will help you a lot when working on any code project.
 
-#Useful links
+# Useful links
 Triganometry: http://www.mathsisfun.com/algebra/trigonometry.html
 
