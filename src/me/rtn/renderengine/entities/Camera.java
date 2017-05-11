@@ -1,7 +1,5 @@
 package me.rtn.renderengine.entities;
 
-import org.lwjgl.input.Keyboard;
-
 import javax.vecmath.Vector3f;
 
 /*
@@ -34,15 +32,7 @@ public class Camera {
     }
 
     public void move(){
-        if(Keyboard.isKeyDown(Keyboard.KEY_W)){
-            position.x -= 0.02F;
-        }
-        if(Keyboard.isKeyDown(Keyboard.KEY_D)){
-            position.z += 0.02F;
-        }
-         if(Keyboard.isKeyDown(Keyboard.KEY_A)){
-            position.x -= 0.02F;
-         }
+
     }
 
     public Vector3f getPosition() {

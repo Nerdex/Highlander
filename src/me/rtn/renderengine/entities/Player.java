@@ -16,14 +16,44 @@ package me.rtn.renderengine.entities;/*
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import me.rtn.renderengine.EntityRenderer;
-import me.rtn.renderengine.shaders.StaticShader;
+import me.rtn.renderengine.DisplayManager;
+import me.rtn.renderengine.models.TexturedModel;
+import org.lwjgl.input.Keyboard;
 
-import javax.vecmath.Matrix4f;
+import javax.vecmath.Vector3f;
 
-public class Player extends EntityRenderer {
+public class Player extends Entity {
 
-    public Player(StaticShader shader, Matrix4f projectionMatrix) {
-        super(shader, projectionMatrix);
+    private final float RUN_SPEED = 10;
+    private final float TURN_SPEED = 180;
+
+    private float currentSpeed = 0;
+    private float currentTurnSpeed = 0;
+
+    public Player(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
+        super(model, position, rotX, rotY, rotZ, scale);
+    }
+
+    public void move(){
+        checkInputs();
+        super.increasePosition(0, currentSpeed * DisplayManager.getFrameTimeSeconds(), 0);
+        float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
+    }
+
+    private void checkInputs(){
+        if(Keyboard.isKeyDown(Keyboard.KEY_W)){
+            this.currentSpeed = RUN_SPEED;
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_S)){
+            this.currentSpeed = - RUN_SPEED;
+        } else {
+            this.currentSpeed = 0;
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_D)){
+            this.currentSpeed = - TURN_SPEED;
+        } else if(Keyboard.isKeyDown(Keyboard.KEY_A)){
+            this.currentSpeed = TURN_SPEED;
+        } else {
+            this.currentSpeed = 0;
+        }
     }
 }
