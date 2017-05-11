@@ -34,5 +34,9 @@ Highlander is made open source for the purpose of learning. The game is currentl
 3) Why is it licensed if we can use/distribute it? A: I don't really want people taking it line by line and saying "HEY I MADE THIS ALL BY MYSELF" that's literally the worse thing that anyone can do towards developers.
 4) Will you follow me on twitter? A: No but you can follow me ;)
 5) Do you recomend Java for games? A: HELL NO
-6) Is this ideal for new game developers? A: No, personally I suggest starting small on something like pacman or space invaders to get a feel of how gamedevelopment is done before moving onto bigger projects.
+6) Is this ideal for new game developers? A: No, personally I suggest starting small on something like pacman or space invaders to get a feel of how game development is done before moving onto bigger projects.
 7) Do you provide support for this code? A: Sometimes, it generally depends on the issue. If the issue is something massive I highly suggest that you go out and find a way to fix it yourself, remember that debugging will help you a lot when working on any code project.
+
+#Useful links
+Triganometry: http://www.mathsisfun.com/algebra/trigonometry.html
+
