@@ -7,6 +7,7 @@ import me.rtn.renderengine.OBJLoader;
 import me.rtn.renderengine.entities.Camera;
 import me.rtn.renderengine.entities.Entity;
 import me.rtn.renderengine.entities.Light;
+import me.rtn.renderengine.entities.Player;
 import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.models.TexturedModel;
 import me.rtn.renderengine.objConverter.ModelData;
@@ -88,9 +89,18 @@ public class MainGameLoop {
         Camera camera = new Camera();
         MasterRenderer renderer = new MasterRenderer();
 
+        RawModel bunnyModel = OBJLoader.loadObjModel("bunny", loader);
+        TexturedModel bunnyTexture = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("white")));
+
+        RawModel playerModel = OBJLoader.loadObjModel("person", loader);
+        TexturedModel playerTexture = new TexturedModel(playerModel, new ModelTexture(loader.loadTexture("playerTexture")));
+        Player player  = new Player(playerTexture, new Vector3f(100, 0, 50), 0,0,0, 1);
+
         while(!Display.isCloseRequested()){
             camera.move();
+            player.move();
 
+            renderer.processEntities(player);
             renderer.processTerrains(terrain);
             renderer.processTerrains(terrain2);
             for(Entity entity:entities){
