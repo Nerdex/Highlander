@@ -1,6 +1,7 @@
 package me.rtn.renderengine;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.Sys;
 import org.lwjgl.opengl.*;
 
 /*
@@ -26,6 +27,9 @@ public class DisplayManager {
     private static final int HEIGHT = 720;
     private static final int FPS_CAP = 120;
 
+    private static long lastFrameTime;
+    private static float delta;
+
     //pretty obvious what this is gonna do
     public static void createDisplay(){
 
@@ -39,14 +43,25 @@ public class DisplayManager {
             e.printStackTrace();
         }
         GL11.glViewport(0, 0, WIDTH,HEIGHT);
+        lastFrameTime = getCurrentTime();
     }
 
     public static void updateDisplay(){
         Display.sync(FPS_CAP);
         Display.update();
+        long currentTime = getCurrentTime();
+        delta = (currentTime - lastFrameTime) / 1000;
+    }
+
+    public static float getFrameTimeSeconds(){
+        return delta;
     }
 
     public static void disposeDisply(){
         Display.destroy();
+    }
+
+    private static long getCurrentTime(){
+        return Sys.getTime() * 1000 /  Sys.getTimerResolution();
     }
 }
