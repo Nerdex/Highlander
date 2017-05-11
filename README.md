@@ -45,4 +45,10 @@ Highlander is made open source for the purpose of learning. The game is currentl
 
 # Useful links
 Triganometry: http://www.mathsisfun.com/algebra/trigonometry.html
-
+Java math: https://docs.oracle.com/javase/tutorial/java/data/beyondmath.html
+Game math: https://www.essentialmath.com/
+LWJGL: https://lwjgl.org
+Slick: http://slick.ninjacave.com/slick-util/
+openGL: https://www.opengl.org/
+Reading/Writing GLSL files: https://people.eecs.ku.edu/~miller/Courses/OpenGL/DeveloperNotes/GLSL_Overview.html
+My twitter: https://twitter.com/rapidthenerd (shameless advertising)
