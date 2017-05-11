@@ -35,6 +35,8 @@ public class Player extends Entity {
     private float currentTurnSpeed = 0;
     private float upwardsSpeed = 0;
 
+    private boolean isJumping = false;
+
     public Player(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
         super(model, position, rotX, rotY, rotZ, scale);
     }
@@ -50,12 +52,16 @@ public class Player extends Entity {
         super.increasePosition(0, upwardsSpeed * DisplayManager.getFrameTimeSeconds(), 0);
         if(super.getPosition().y < TERRAIN_HEIGHT){
             upwardsSpeed = 0;
+            isJumping = false;
             super.getPosition().y = TERRAIN_HEIGHT;
         }
     }
 
     private void jump(){
-        this.upwardsSpeed = JUMP_POWER;
+        if(!isJumping) {
+            this.upwardsSpeed = JUMP_POWER;
+        isJumping = true;
+        }
     }
 
     private void checkInputs(){
