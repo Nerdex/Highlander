@@ -43,6 +43,7 @@ public class Camera {
         calculatePitch();
         float horizontalDistance = calculateHorizontalDistance();
         float verticleDistance = calculateVerticleDistance();
+        calculateCameraPosition(horizontalDistance, verticleDistance);
     }
 
     public Vector3f getPosition() {
@@ -74,6 +75,11 @@ public class Camera {
     }
 
     private void calculateCameraPosition(float horizontalDisance, float verticleDistance){
+        float theta = player.getRotY() + angleAroundPlayer;
+        float offsetX = (float) (horizontalDisance * Math.sin(Math.toRadians(theta)));
+        float offsetZ = (float) (horizontalDisance * Math.cos(Math.toRadians(theta)));
+        position.x = player.getPosition().x - offsetX;
+        position.z = player.getPosition().z - offsetZ;
         position.y = player.getPosition().y + verticleDistance;
     }
 
