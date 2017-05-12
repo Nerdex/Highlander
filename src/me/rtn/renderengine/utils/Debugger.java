@@ -16,12 +16,17 @@ package me.rtn.renderengine.utils;/*
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Debugger {
 
     private static final String IN_GAME_DEBUG_PREFIX = "[GAME-DEBUG]";
     private static final String LOADING_DEBUG_PREFIX = "[LOADING-DEBUG]";
     private static final String EXCEPTION_CAUGHT_PREFIX = "[EXCEPTION-CAUGHT-DEBUG]";
-    
+    private static final String FILENAME_LOCATION = "F:\\Java\\Projects\\3DGa,e\\src\\debugfiles"; //change this to your debug directory
+
     public static void useInGameDebug(String debugMessage){
         System.out.println(IN_GAME_DEBUG_PREFIX + debugMessage);
     }
@@ -32,5 +37,30 @@ public class Debugger {
 
     public static void useExceptionDebug(String debugMessage){
         System.out.println(EXCEPTION_CAUGHT_PREFIX + debugMessage);
+    }
+
+    public static void writeDebug(String content){
+        BufferedWriter bufferedWriter = null;
+        FileWriter fileWriter = null;
+
+        try {
+            String fileMessage = content;
+
+            fileWriter = new FileWriter(FILENAME_LOCATION );
+            bufferedWriter = new BufferedWriter(fileWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(bufferedWriter != null){
+                    bufferedWriter.close();
+                }
+                if(fileWriter != null){
+                    fileWriter.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
