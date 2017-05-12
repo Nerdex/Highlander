@@ -42,7 +42,7 @@ public class Debugger {
         System.out.println(EXCEPTION_CAUGHT_PREFIX + debugMessage);
     }
 
-    public static void writeDebug(String content){
+    public static void writeDebugFile(String content){
         BufferedWriter bufferedWriter = null;
         FileWriter fileWriter = null;
 
@@ -54,6 +54,7 @@ public class Debugger {
 
             fileWriter = new FileWriter(FILENAME_LOCATION + format.format(calendar));
             bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(fileMessage);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
