@@ -1,5 +1,7 @@
 package me.rtn.renderengine.entities;
 
+import org.lwjgl.input.Mouse;
+
 import javax.vecmath.Vector3f;
 
 /*
@@ -21,14 +23,18 @@ import javax.vecmath.Vector3f;
  */
 public class Camera {
 
-    private Vector3f position = new Vector3f(0,0,0);
-    private float pitch;
-    private float yaw;
+    private float distanceFromPlayer = 50;
+    private float angleAroundPlayer = 0;
 
-    public Camera() {
-        this.position = position;
-        this.pitch = pitch;
-        this.yaw = yaw;
+    private Vector3f position = new Vector3f(0,0,0);
+    private float pitch = 20;
+    private float yaw = 0;
+    private float roll;
+
+    private Player player;
+
+    public Camera(Player player) {
+        this.player = player;
     }
 
     public void move(){
@@ -57,6 +63,29 @@ public class Camera {
 
     public void setYaw(float yaw) {
         this.yaw = yaw;
+    }
+
+    public float getRoll(){
+        return roll;
+    }
+
+    private void calculateZoom(){
+        float zoomLevel = Mouse.getDWheel() * 0.1f;
+        distanceFromPlayer = zoomLevel;
+    }
+
+    private void calculatePitch(){
+        if(Mouse.isButtonDown(1)){
+            float pitchChange = Mouse.getDY() * 0.1f;
+            pitch -= pitchChange;
+        }
+    }
+
+    private void calculateAnglePlayer(){
+        if(Mouse.isButtonDown(0)){
+            float angleChange = Mouse.getDX() * 0.3f;
+            angleAroundPlayer -= angleChange;
+        }
     }
 
 }
