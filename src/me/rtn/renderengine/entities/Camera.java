@@ -38,7 +38,9 @@ public class Camera {
     }
 
     public void move(){
-
+        calculateZoom();
+        calculateAnglePlayer();
+        calculatePitch();
     }
 
     public Vector3f getPosition() {
@@ -71,7 +73,7 @@ public class Camera {
 
     private void calculateZoom(){
         float zoomLevel = Mouse.getDWheel() * 0.1f;
-        distanceFromPlayer = zoomLevel;
+        distanceFromPlayer -= zoomLevel;
     }
 
     private void calculatePitch(){
