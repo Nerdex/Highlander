@@ -19,6 +19,9 @@ package me.rtn.renderengine.utils;/*
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Debugger {
 
@@ -43,10 +46,13 @@ public class Debugger {
         BufferedWriter bufferedWriter = null;
         FileWriter fileWriter = null;
 
+        DateFormat format = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+
         try {
             String fileMessage = content;
 
-            fileWriter = new FileWriter(FILENAME_LOCATION );
+            fileWriter = new FileWriter(FILENAME_LOCATION + format.format(calendar));
             bufferedWriter = new BufferedWriter(fileWriter);
         } catch (IOException e) {
             e.printStackTrace();
