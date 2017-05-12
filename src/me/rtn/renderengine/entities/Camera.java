@@ -41,6 +41,8 @@ public class Camera {
         calculateZoom();
         calculateAnglePlayer();
         calculatePitch();
+        float horizontalDistance = calculateHorizontalDistance();
+        float verticleDistance = calculateVerticleDistance();
     }
 
     public Vector3f getPosition() {
@@ -69,6 +71,18 @@ public class Camera {
 
     public float getRoll(){
         return roll;
+    }
+
+    private void calculateCameraPosition(float horizontalDisance, float verticleDistance){
+        position.y = player.getPosition().y + verticleDistance;
+    }
+
+    private float calculateHorizontalDistance(){
+        return (float) (distanceFromPlayer * Math.cos(Math.toRadians(pitch)));
+    }
+
+    private float calculateVerticleDistance(){
+        return (float) (distanceFromPlayer * Math.sin(Math.toRadians(pitch)));
     }
 
     private void calculateZoom(){
