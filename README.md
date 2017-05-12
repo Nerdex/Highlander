@@ -41,8 +41,11 @@ Highlander is made open source for the purpose of learning. The game is currentl
 1) Triganometry: http://www.mathsisfun.com/algebra/trigonometry.html
 2) Java math: https://docs.oracle.com/javase/tutorial/java/data/beyondmath.html
 3) Game math: https://www.essentialmath.com/
-4) LWJGL: https://lwjgl.org
+4) LWJGL: https://lwjgl.org (This version is using LWJGL 2.0 but can be converted to 3.0)
 5) Slick: http://slick.ninjacave.com/slick-util/
 6) openGL: https://www.opengl.org/
 7) Reading/Writing GLSL files: https://people.eecs.ku.edu/~miller/Courses/OpenGL/DeveloperNotes/GLSL_Overview.html
-8) My twitter: https://twitter.com/rapidthenerd (shameless advertising)
+8) IntelliJ (my prefered IDE you don't have to use this) : https://www.jetbrains.com/idea/
+9) Git bash: Windows: https://git-for-windows.github.io/ MAC: https://git-scm.com/downloads Linux: https://git-scm.com/download/linux
+10) oracle Javadocs: https://docs.oracle.com/javase/7/docs/api/
+11) My twitter: https://twitter.com/rapidthenerd (shameless advertising)
