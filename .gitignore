@@ -23,5 +23,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-.idea/
-#fuck the idea folder the annoying piece of shit (even though its needed but still!)
+/.idea/
+/out/
+3DGame.iml
