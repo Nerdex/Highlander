@@ -22,6 +22,7 @@ import me.rtn.renderengine.textures.TerrainTexture;
 import me.rtn.renderengine.textures.TerrainTexturePack;
 
 import javax.imageio.ImageIO;
+import javax.vecmath.Vector3f;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -97,9 +98,10 @@ public class Terrain {
                 verticies[vertexPointer * 3] = (float) j/((float) VERTEX_COUNT - 1) * SIZE;
                 verticies[vertexPointer * 3 + 1] = getHeight(j, i, image);
                 verticies[vertexPointer * 3 + 2] = (float) i/((float) VERTEX_COUNT - 1) * SIZE;
-                normals[vertexPointer * 3] = 0;
-                normals[vertexPointer * 3 + 1] = 0;
-                normals[vertexPointer * 3 + 2] = 0;
+                Vector3f normal = calcNormal(j, i, image);
+                normals[vertexPointer * 3] = normal.x;
+                normals[vertexPointer * 3 + 1] = normal.y;
+                normals[vertexPointer * 3 + 2] = normal.z;
                 textureCoords[vertexPointer * 2] = (float) j/((float) VERTEX_COUNT - 1);
                 textureCoords[vertexPointer * 2 + 1] = (float) i/((float) VERTEX_COUNT - 1);
                 vertexPointer++;
@@ -121,6 +123,16 @@ public class Terrain {
             }
         }
         return loader.loadToVAO(verticies, textureCoords, normals, indicies);
+    }
+
+    private Vector3f calcNormal(int x, int z, BufferedImage image){
+        float heightL = getHeight(x+1, z, image);
+        float heightR = getHeight(x-1, z, image);
+        float heightD = getHeight(x, z-1, image);
+        float heightU = getHeight(x, z+1, image);
+        Vector3f normal = new Vector3f(heightL - heightR, 2f, heightD - heightU);
+        normal.normalize();
+        return normal;
     }
 
     private float getHeight(int x, int z, BufferedImage image){
