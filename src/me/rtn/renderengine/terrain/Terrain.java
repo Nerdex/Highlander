@@ -21,10 +21,17 @@ import me.rtn.renderengine.models.RawModel;
 import me.rtn.renderengine.textures.TerrainTexture;
 import me.rtn.renderengine.textures.TerrainTexturePack;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 public class Terrain {
 
     private static final float SIZE = 1000;
-    private static final int VERTEX_COUNT = 128;
+    private static final float MAX_HEIGHT = 40;
+    private static final float MIN_HEIGHT =  -40;
+    private static final float MAX_PIXEL_COLOUR = 256 * 256 * 256;
 
     private float x;
     private float z;
@@ -67,7 +74,17 @@ public class Terrain {
         this.blendMap = blendMap;
     }
 
-    private RawModel generateTerrain(Loader loader){
+    private RawModel generateTerrain(Loader loader, String heightMap){
+
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(new File("res/" + heightMap + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int VERTEX_COUNT = image.getHeight();
+
         int count = VERTEX_COUNT * VERTEX_COUNT;
         float[] verticies = new float[count * 3];
         float[] normals = new float[count * 3];
