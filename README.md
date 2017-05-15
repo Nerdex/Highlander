@@ -1,4 +1,4 @@
-# Highlander
+# Highlander [![Build Status](https://travis-ci.org/{RapidTheNerd}/{Highlander}.png?branch=master)](https://travis-ci.org/{RapidTheNerd}/{Highlander})
 Highlander is an open source 3D sandbox game. Currently being written in Java with the use of openGL and LWJGL. The game uses basic LWJGL and openGL primarily for rendering. Rendering the entities, terrain and objects is all done in these. The movement of the camera, fog, and player entity is done through custom code with very little help from LWJGL and openGL.
 
 # Licesne 
