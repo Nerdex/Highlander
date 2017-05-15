@@ -26,8 +26,8 @@ public class OBJFileLoader {
 
     private static final String RES_LOC = "/res/";
 
-    public static ModelData loadOBJ(String objFileName){
-        FileReader reader = null;
+    public static ModelData loadOBJ(String objFileName) throws FileNotFoundException {
+        FileReader reader = new FileReader(objFileName);
         File objFile = new File(RES_LOC + objFileName + ".obj");
         try{
             reader = new FileReader(objFile);
