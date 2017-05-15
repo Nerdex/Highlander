@@ -25,6 +25,7 @@ Highlander is made open source for the purpose of learning. The game is currentl
 7) Do you provide support for this code? A: Sometimes, it generally depends on the issue. If the issue is something massive I highly suggest that you go out and find a way to fix it yourself, remember that debugging will help you a lot when working on any code project.
 8) Why is ther PHP if it's a Java game? A: I plan to add some stats to the game like hours played, blocks moved and such. 
 9) How did you figure all this out? A: Research, there is many tutorials on 3D game development and programming maths, this will be an essential to you. There is nothing wrong with looking for tutorials as long as you learn from it.
+10) Why is there other languages in the code if its a Java game? A: Simple, eventually the PHP will be used to hook into the main website of the game with stats and such. C# is there for the game launcher, because writing a game launcher in C# is way better and effecient than using Java.
 
 # Up and coming additions
 1) Player interactivity with mobs
