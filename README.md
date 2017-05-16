@@ -2,7 +2,7 @@
 Highlander is an open source 3D sandbox game. Currently being written in Java with the use of openGL and LWJGL. The game uses basic LWJGL and openGL primarily for rendering. Rendering the entities, terrain and objects is all done in these. The movement of the camera, fog, and player entity is done through custom code with very little help from LWJGL and openGL.
 
 # Licesne 
-MIT https://github.com/RapidTheNerd/Highlander/blob/master/license
+Apache https://github.com/RapidTheNerd/Highlander/blob/master/license
 
 # Usage
 Highlander is made open source for the purpose of learning. The game is currently an ongoing project which I'm working on for college and in my spare time. I don't really expect it to go far anywhere nor am i trying to. I made the project to help people learn about openGL and lwjgl. I admit the code in this project isn't the best. If you want to fork it feel free, or ask me any questions on twitter @RapidTheNerd
